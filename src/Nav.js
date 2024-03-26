@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Nav.css'
 
-const Nav = () => {
+function Nav() {
+  const [show, hadnleShow] = useState(false);
+
+  const tranisitionNavBar = () => {
+    if (window.scrollY > 100) {
+      hadnleShow(true);
+    } else {
+      hadnleShow(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", tranisitionNavBar);
+    return () => window.removeEventListener("scrol", tranisitionNavBar);
+  }, [])
+
+
   return (
-    <div className='nav'>
+    <div className={`nav ${show && 'nav_black'}`}>
       <div className='nav_contents'>
         <img
           className='nav_logo'
-          src="https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940"
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
           alt=""
         />
 
